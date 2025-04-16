@@ -2,7 +2,7 @@
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Specify minimum CMake version
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.31.6)
 
 # Set the project name dynamically based on the folder name
 get_filename_component(PROJECT_NAME ${CMAKE_SOURCE_DIR} NAME)
@@ -34,6 +34,32 @@ link_directories(${CMAKE_SOURCE_DIR}/lib)
 
 # Link pdcurses library
 # target_link_libraries(main PRIVATE pdcurses) uncomment and add library
+
+include(FetchContent)
+
+set(BUILD_SHARED_LIBS        OFF  CACHE BOOL "" FORCE)  
+set(SFML_BUILD_EXAMPLES      OFF  CACHE BOOL "" FORCE)
+set(SFML_BUILD_TEST_SUITE    OFF  CACHE BOOL "" FORCE)
+set(SFML_BUILD_DOC           OFF  CACHE BOOL "" FORCE)
+
+FetchContent_Declare(
+  sfml
+  GIT_REPOSITORY https://github.com/SFML/SFML.git
+  GIT_TAG        3.0.0
+)
+
+FetchContent_MakeAvailable(sfml)  
+
+target_link_libraries(
+    main
+    PRIVATE
+        sfml-graphics
+        sfml-window
+        sfml-system
+)
+
+# Warnings into errors
+# target_compile_options(main PRIVATE -Wall -Wextra -Werror)
 
 # Custom target to generate .clang_complete (optional)
 add_custom_target(

@@ -1,6 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <cstdlib>  
+#include <SFML/Graphics.hpp>
 
-void hello();
+constexpr int ScreenWidth = 1024;
+constexpr int ScreenHeight = 1024;
+constexpr sf::Vector2u ScreenDims = {ScreenWidth, ScreenHeight};

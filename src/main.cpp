@@ -1,8 +1,20 @@
 #include "main.hpp"
 
-void hello() { std::cout << "Hello, World!" << std::endl; }
+#include <stdlib.h>
+
+#include <iostream>
+#include <optional>
 
 int main() {
-  hello();
+  sf::RenderWindow window(sf::VideoMode(ScreenDims), "Flappy Bird");
+
+  while (window.isOpen()) {
+    while (const std::optional event = window.pollEvent()) {
+      if (event->is<sf::Event::Closed>()) {
+        window.close();
+      }
+    }
+  }
+
   return EXIT_SUCCESS;
 }
