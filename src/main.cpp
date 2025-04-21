@@ -2,7 +2,6 @@
 
 #include <stdlib.h>
 
-#include <iostream>
 #include <optional>
 
 int main() {
